@@ -1,7 +1,8 @@
 <template>
   <div v-if="items.length > 0" class="gallery">
     <figure :class="{ 'loading': isLoading}" class="main-image-box shadow">
-      <img class="main-image" :src="items[selectedIndex].src" @load="onImgLoad">
+      <img :src="mainImage" class="main-image">
+      <img :src="backgroundImage" style="display:none" @load="backgroundImageLoaded">
     </figure>
     <div
       ref="thumbnails"
@@ -21,6 +22,7 @@
         >
       </div>
     </div>
+    </figure>
   </div>
 </template>
 
@@ -40,13 +42,23 @@ export default {
   data () {
     return {
       isLoading: true,
-      selectedIndex: 0
+      selectedIndex: 0,
+      mainImage: '',
+      backgroundImage: ''
     }
   },
   watch: {
     selectedImage (newVal) {
       this.selectedIndex = newVal
+    },
+    selectedIndex (newVal) {
+      this.loadMainImage(newVal)
+    },
+    items () {
+      this.loadMainImage(this.selectedIndex)
     }
+  },
+  mounted () {
   },
   methods: {
     selectThumbnail (index) {
@@ -69,6 +81,17 @@ export default {
       e = window.event || e
       const delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)))
       this.$refs.thumbnails.scrollLeft -= (delta * 222)
+    },
+    backgroundImageLoaded () {
+      this.mainImage = this.backgroundImage
+      this.isLoading = false
+    },
+    loadMainImage (newVal) {
+      if (this.items.length > 0) {
+        this.isLoading = true
+        this.mainImage = this.items[newVal].thumbnail
+        this.backgroundImage = this.items[newVal].src
+      }
     }
   }
 }
@@ -121,8 +144,9 @@ export default {
 .loading img{
   position: relative;
   filter: blur(25px);
-  transform: scale(1.1);
-  overflow:hidden;
+  height: calc(100vh - 100px - 120px);
+ // transform: scale(2);
+  // overflow:hidden;
 }
 
 .loading{

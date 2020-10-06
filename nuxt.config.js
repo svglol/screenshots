@@ -39,7 +39,9 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/buefy
     'nuxt-buefy',
-    'nuxt-lazy-load',
+    ['nuxt-lazy-load', {
+      directiveOnly: true
+    }],
     'nuxt-fontawesome'
   ],
 
