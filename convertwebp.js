@@ -19,10 +19,9 @@ glob('assets/images/**/*.png', function (er, files) {
       .toFile(filePath + '/' + fileName.name + '.webp')
       .then((info) => { bar.tick() })
 
-    fs.mkdirSync(filePath + '/thumb/', { recursive: true })
     sharp(item)
       .resize({ width: 300 })
-      .toFile(filePath + '/thumb/' + fileName.name + '.webp', (err, info) => {
+      .toFile(filePath + '/' + fileName.name + '_thumb.webp', (err, info) => {
         if (err) { throw err }
       })
   })

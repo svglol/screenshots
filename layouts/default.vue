@@ -8,7 +8,7 @@
           </div>
           <div>
             <ul class="socialMenu">
-              <li v-for="item in socialMenu" :key="item">
+              <li v-for="item in socialMenu" :key="item.icon">
                 <a :href="item.link" target="_blank">
                   <font-awesome-icon :icon="['fab',item.icon]" />
                 </a>
@@ -160,16 +160,16 @@ export default {
     },
     getImgUrl (item, subItem) {
       // get thumbnail image
-      let num = 0
-      if (subItem) {
-        num = Math.floor(0.67 * (item.images.length))
-      } else {
-        num = Math.floor(0.34 * (item.images.length))
-      }
-      const image = item.images[num].pathLong
-      const n = image.lastIndexOf('/')
-      const result = image.substr(0, n) + '/thumb' + image.substr(n)
-      return result
+      // let num = 0
+      // if (subItem) {
+      //   num = Math.floor(0.67 * (item.images.length))
+      // } else {
+      //   num = Math.floor(0.34 * (item.images.length))
+      // }
+      // const image = item.images[num].pathLong
+      // const n = image.lastIndexOf('.')
+      // const result = image.substr(0, n) + '_thumb' + image.substr(n)
+      // return result
     },
     openLink (index, subIndex) {
       this.activeIndex = index
