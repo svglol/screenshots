@@ -1,4 +1,6 @@
-# images-gallery
+# screenshots
+
+A static website made with Nuxt.js and Vue to display all my iRacing Screenshots on GH-Pages 
 
 ## Build Setup
 
@@ -15,6 +17,11 @@ $ yarn start
 
 # generate static project
 $ yarn generate
-```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+# create webp images
+$ yarn images
+
+# deploy
+$ yarn generate
+$ yarn deploy
+```
