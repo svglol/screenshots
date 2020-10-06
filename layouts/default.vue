@@ -94,7 +94,11 @@ export default {
     importAll (r) {
       r.keys().forEach((item, i) => {
         const folders = []
-        if (!item.includes('/thumb/')) {
+        if (!item.includes('_thumb')) {
+          const image = item
+          const n = image.lastIndexOf('.')
+          const thumbnail = image.substr(0, n) + '_thumb' + image.substr(n)
+
           let path = item
           path.indexOf(1)
           path = path.split('/')
@@ -109,9 +113,9 @@ export default {
           // set into map by folder
           let imageSet = this.images.find(el => el.folder === folder)
           if (imageSet) {
-            imageSet.images.push({ pathLong: r(item), pathShort: item })
+            imageSet.images.push({ image: r(item), thumbnail: r(thumbnail) })
           } else {
-            const images = [{ pathLong: r(item), pathShort: item }]
+            const images = [{ image: r(item), thumbnail: r(thumbnail) }]
             this.images.push({ folder, images, subfolders: [] })
           }
 
@@ -120,9 +124,9 @@ export default {
           if (subfolder) {
             const subImageSet = imageSet.subfolders.find(el => el.subfolder === subfolder)
             if (subImageSet) {
-              subImageSet.images.push({ pathLong: r(item), pathShort: item })
+              subImageSet.images.push({ image: r(item), thumbnail: r(thumbnail) })
             } else {
-              const images = [{ pathLong: r(item), pathShort: item }]
+              const images = [{ image: r(item), thumbnail: r(thumbnail) }]
               imageSet.subfolders.push({ subfolder, images })
             }
           }
@@ -132,7 +136,12 @@ export default {
       // add all images to an all image link
       const allImages = []
       r.keys().forEach((item, i) => {
-        allImages.push({ pathLong: r(item), pathShort: item })
+        if (!item.includes('_thumb')) {
+          const image = item
+          const n = image.lastIndexOf('.')
+          const thumbnail = image.substr(0, n) + '_thumb' + image.substr(n)
+          allImages.push({ image: r(item), thumbnail: r(thumbnail) })
+        }
       })
       this.images.unshift({ folder: 'all', images: allImages })
 
@@ -159,17 +168,16 @@ export default {
       })
     },
     getImgUrl (item, subItem) {
+      // console.log(item)
       // get thumbnail image
-      // let num = 0
-      // if (subItem) {
-      //   num = Math.floor(0.67 * (item.images.length))
-      // } else {
-      //   num = Math.floor(0.34 * (item.images.length))
-      // }
-      // const image = item.images[num].pathLong
-      // const n = image.lastIndexOf('.')
-      // const result = image.substr(0, n) + '_thumb' + image.substr(n)
-      // return result
+      let num = 0
+      if (subItem) {
+        num = Math.floor(0.67 * (item.images.length))
+      } else {
+        num = Math.floor(0.34 * (item.images.length))
+      }
+      const image = item.images[num].thumbnail
+      return image
     },
     openLink (index, subIndex) {
       this.activeIndex = index
