@@ -1,0 +1,86 @@
+// Set your colors
+$primary: #dddddd;
+$primary-invert: findcolorinvert($primary);
+$twitter: #4099ff;
+$twitter-invert: findcolorinvert($twitter);
+@import '~bulma/sass/utilities/all'; // Setup $colors to use as bulma classes (e.g. 'is-twitter')
+$colors: (
+  'white': ($white, $black,),
+  'black': ($black, $white,),
+  'light': ($light, $light-invert,),
+  'dark': ($dark, $dark-invert,),
+  'primary': ($primary, $primary-invert,),
+  'info': ($info, $info-invert,),
+  'success': ($success, $success-invert,),
+  'warning': ($warning, $warning-invert,),
+  'danger': ($danger, $danger-invert,),
+  'twitter': ($twitter, $twitter-invert,),
+); // Links
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary; // Import Bulma and Buefy styles
+@import '~bulma';
+@import '~buefy/src/scss/buefy';
+$white: #fff;
+$grey: darken($white, 15%);
+$black: #333;
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
+html {
+  overflow-y: hidden; /* Hide vertical scrollbar */
+  scroll-behavior: smooth;
+  background-color: #4d4d4d;
+  background-image: url("../bg.webp");
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+body{
+  font-family: 'Oswald', sans-serif;
+}
+
+/* custom Scroll bars */
+::-webkit-scrollbar {
+  width: 10px !important;
+  height: 10px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: $primary;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+img {
+    pointer-events: none;
+}
+
+.indicator-item {
+flex: none!important;
+}
+
+.shadow{
+  box-shadow:  0px 2px 5px 0px rgba(0,0,0,0.50)
+}
+
+.selected img{
+  outline: 2px solid $primary;
+outline-offset: -6px;
+}

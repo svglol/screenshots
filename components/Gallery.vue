@@ -1,0 +1,140 @@
+<template>
+  <div v-if="items.length > 0" class="gallery">
+    <figure :class="{ 'loading': isLoading}" class="main-image-box shadow">
+      <img class="main-image" :src="items[selectedIndex].src" @load="onImgLoad">
+    </figure>
+    <div
+      ref="thumbnails"
+      class="scrolling-wrapper"
+      @wheel="handleScroll"
+    >
+      <div
+        v-for="(item,index) in items"
+        :key="item.thumbnail"
+        class="thumbnail"
+        :class="{ 'selected': selectedIndex === index}"
+        @click="selectThumbnail(index)"
+      >
+        <img
+          class="shadow"
+          :src="item.thumbnail"
+        >
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    items: {
+      type: Array,
+      required: true
+    },
+    selectedImage: {
+      type: Number,
+      required: true,
+      default: 0
+    }
+  },
+  data () {
+    return {
+      isLoading: true,
+      selectedIndex: 0
+    }
+  },
+  watch: {
+    selectedImage (newVal) {
+      this.selectedIndex = newVal
+    }
+  },
+  methods: {
+    selectThumbnail (index) {
+      if (index !== this.selectedIndex) {
+        this.isLoading = true
+        this.selectedIndex = index
+        let url = ''
+        if (JSON.stringify(window.location).includes('?')) {
+          url = window.location.href.split('?')[0]
+        } else {
+          url = window.location
+        }
+        history.replaceState({}, null, url + '?image=' + index)
+      }
+    },
+    onImgLoad () {
+      this.isLoading = false
+    },
+    handleScroll (e) {
+      e = window.event || e
+      const delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)))
+      this.$refs.thumbnails.scrollLeft -= (delta * 222)
+    }
+  }
+}
+</script>
+
+<style scoped lang="scss">
+
+.gallery{
+  padding: 0rem;
+  height: calc(100vh);
+  display:flex;
+  flex-direction: column;
+}
+
+.main-image{
+  max-width: 100%;
+  object-fit: contain;
+  max-height: calc(100vh - 100px - 120px);
+  display: block;
+}
+
+.scrolling-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+  .thumbnail {
+    flex: 0 0 auto;
+    max-height: 120px;
+    margin:.25rem;
+    cursor: pointer;
+  }
+
+.thumbnail img{
+  max-height: 120px;
+  height: 120px;
+  object-fit: contain;
+  width:auto;
+  /* filter: brightness(50%);
+-webkit-filter: brightness(50%); */
+}
+
+.thumbnail:hover img{
+  filter: brightness(80%);
+-webkit-filter: brightness(80%);
+}
+
+.loading img{
+  position: relative;
+  filter: blur(25px);
+  transform: scale(1.1);
+  overflow:hidden;
+}
+
+.loading{
+  overflow: hidden;
+}
+
+.main-image-box{
+  overflow: hidden;
+width: fit-content;
+margin-left: auto;
+margin-right: auto;
+margin-top: auto;
+margin-bottom: auto;
+}
+</style>
