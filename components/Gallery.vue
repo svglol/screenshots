@@ -1,6 +1,6 @@
 <template>
   <div v-if="items.length > 0" class="gallery">
-    <figure :class="{ 'loading': isLoading}" class="main-image-box shadow">
+    <figure :class="{ 'loading': isLoading}" class="main-image-box shadow" @click="isImageModalActive = true">
       <img :src="mainImage" class="main-image">
       <img :src="backgroundImage" style="display:none" @load="backgroundImageLoaded">
     </figure>
@@ -17,12 +17,17 @@
         @click="selectThumbnail(index)"
       >
         <img
+          v-lazy-load
           class="shadow"
           :src="item.thumbnail"
         >
       </div>
     </div>
     </figure>
+
+    <b-modal v-model="isImageModalActive" full-screen>
+      <img :src="mainImage" class="modal-image">
+    </b-modal>
   </div>
 </template>
 
@@ -44,7 +49,8 @@ export default {
       isLoading: true,
       selectedIndex: 0,
       mainImage: '',
-      backgroundImage: ''
+      backgroundImage: '',
+      isImageModalActive: false
     }
   },
   watch: {
@@ -106,6 +112,17 @@ export default {
   flex-direction: column;
 }
 
+.modal-image{
+  padding: 1rem;
+  max-height: 100vh;
+  margin-left:auto;
+  margin-right: auto;
+}
+
+.modal-content {
+  background-color: transparent;
+}
+
 .main-image{
   max-width: 100%;
   object-fit: contain;
@@ -154,6 +171,7 @@ export default {
 }
 
 .main-image-box{
+   cursor: pointer;
   overflow: hidden;
 width: fit-content;
 margin-left: auto;

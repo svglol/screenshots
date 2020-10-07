@@ -84,3 +84,8 @@ flex: none!important;
   outline: 2px solid $primary;
 outline-offset: -6px;
 }
+
+.modal-content {
+  background-color: transparent!important;
+  text-align: center;
+}
