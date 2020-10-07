@@ -1,7 +1,8 @@
 <template>
   <div>
     <section class="main-content columns">
-      <div class="column sidebar">
+      <!-- Desktop Nav Sidebar -->
+      <div class="column sidebar is-hidden-mobile">
         <div style="display:flex; justify-content: center;">
           <div>
             <h2>Matt Trotman</h2>
@@ -59,9 +60,39 @@
             </ul>
             </nuxt-link>
           </li>
-          </li>
         </ul>
       </div>
+
+      <!-- Mobile Nav Bar -->
+      <b-navbar class="is-hidden-tablet is-primary">
+        <template slot="brand">
+          <nuxt-link to="">
+            <h2 style="margin-left:1.5rem">
+              Matt Trotman
+            </h2>
+          </nuxt-link>
+
+          <ul class="socialMenu">
+            <li v-for="item in socialMenu" :key="item.icon">
+              <a :href="item.link" target="_blank">
+                <font-awesome-icon :icon="['fab',item.icon]" />
+              </a>
+            </li>
+            </a>
+          </ul>
+        </template>
+        <template slot="start">
+          <b-navbar-item
+            v-for="(item,index) in images"
+            :key="item.folder"
+            exact-active-class="is-active"
+            tag="nuxt-link"
+            :to="generateLink(images[index].folder)"
+          >
+            {{ item.folder }}
+          </b-navbar-item>
+        </template>
+      </b-navbar>
 
       <div class="container column" style="padding-left:0">
         <nuxt />
@@ -223,6 +254,15 @@ $primary: #dddddd;
    background-color: rgba(0,0,0,0.5);
 }
 
+.navbar {
+   border-bottom: 2px solid white;
+}
+
+.navbar-brand{
+  margin-left: 1.5rem;
+  margin-right: 1rem;
+}
+
 ul li{
   position: relative;
 }
@@ -339,5 +379,15 @@ hr {
   margin-right: -.75rem;
   margin-left: -.75rem;
   color:darken(white, 50)
+}
+
+.navbar-item, .navbar-link{
+  margin-left: 1rem;
+  color:$primary;
+  text-transform: uppercase;
+}
+
+a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover, a.navbar-item.is-active, .navbar-link:focus, .navbar-link:focus-within, .navbar-link:hover, .navbar-link.is-active {
+    background-color: rgba(0,0,0,0.2);
 }
 </style>

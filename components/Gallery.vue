@@ -1,20 +1,37 @@
 <template>
-  <div v-if="items.length > 0" class="gallery">
-    <figure :class="{ 'loading': isLoading}" class="main-image-box shadow" @click="isImageModalActive = true">
-      <img :src="mainImage" class="main-image">
-      <img :src="backgroundImage" style="display:none" @load="backgroundImageLoaded">
-    </figure>
-    <div
-      ref="thumbnails"
-      class="scrolling-wrapper"
-      @wheel="handleScroll"
-    >
+  <div>
+    <div v-if="items.length > 0" class="gallery is-hidden-mobile">
+      <figure :class="{ 'loading': isLoading}" class="main-image-box shadow" @click="isImageModalActive = true">
+        <img :src="mainImage" class="main-image">
+        <img :src="backgroundImage" style="display:none" @load="backgroundImageLoaded">
+      </figure>
       <div
-        v-for="(item,index) in items"
+        ref="thumbnails"
+        class="scrolling-wrapper"
+        @wheel="handleScroll"
+      >
+        <div
+          v-for="(item,index) in items"
+          :key="item.thumbnail"
+          class="thumbnail"
+          :class="{ 'selected': selectedIndex === index}"
+          @click="selectThumbnail(index)"
+        >
+          <img
+            v-lazy-load
+            class="shadow"
+            :src="item.thumbnail"
+          >
+        </div>
+      </div>
+      </figure>
+    </div>
+    <div class="is-hidden-tablet" style="margin:1.5rem;width:100vw">
+      <div
+        v-for="(item) in items"
         :key="item.thumbnail"
-        class="thumbnail"
-        :class="{ 'selected': selectedIndex === index}"
-        @click="selectThumbnail(index)"
+        class="thumbnail-mobile"
+        @click="selectImageMobile(item.src)"
       >
         <img
           v-lazy-load
@@ -23,8 +40,6 @@
         >
       </div>
     </div>
-    </figure>
-
     <b-modal v-model="isImageModalActive" full-screen>
       <img :src="mainImage" class="modal-image">
     </b-modal>
@@ -98,6 +113,10 @@ export default {
         this.mainImage = this.items[newVal].thumbnail
         this.backgroundImage = this.items[newVal].src
       }
+    },
+    selectImageMobile (src) {
+      this.mainImage = src
+      this.isImageModalActive = true
     }
   }
 }
@@ -119,10 +138,6 @@ export default {
   margin-right: auto;
 }
 
-.modal-content {
-  background-color: transparent;
-}
-
 .main-image{
   max-width: 100%;
   object-fit: contain;
@@ -142,6 +157,12 @@ export default {
     max-height: 120px;
     margin:.25rem;
     cursor: pointer;
+  }
+
+  .thumbnail-mobile img{
+    width: 98%;
+    object-fit:contain;
+    margin-bottom: .5rem;
   }
 
 .thumbnail img{
