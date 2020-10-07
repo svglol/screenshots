@@ -32,11 +32,7 @@
               <div
                 class="list-item"
               >
-                <img
-                  :src="getImgUrl(item,false)"
-                  class="shadow"
-                  :class="{ 'active': activeIndex === index }"
-                >
+                <b-img-lazy class="shadow" :src="getImgUrl(item,false)" blank-src="@/assets/placeholder.webp" :class="{ 'active': activeIndex === index }" />
                 <span class="menu-item">  {{ item.folder }} </span>
               </div>
             </nuxt-link>
@@ -47,11 +43,7 @@
                   exact-active-class="is-active"
                   @click.native="openLink(index,subIndex)"
                 >
-                  <img
-                    :src="getImgUrl(subItem,true)"
-                    :class="{ 'active': activeSubIndex === subIndex }"
-                    class="shadow"
-                  >
+                  <b-img-lazy class="shadow" :src="getImgUrl(subItem,true)" blank-src="@/assets/placeholder.webp" :class="{ 'active': activeSubIndex === subIndex }" />
                   <span class="sub-menu-item">  {{ subItem.subfolder }} </span>
                 </nuxt-link>
               </li>
