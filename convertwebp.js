@@ -20,7 +20,7 @@ glob('assets/images/**/*.png', function (er, files) {
       .then((info) => { bar.tick() })
 
     sharp(item)
-      .resize({ width: 300 })
+      .resize({ width: 450 })
       .toFile(filePath + '/' + fileName.name + '_thumb.webp', (err, info) => {
         if (err) { throw err }
       })
