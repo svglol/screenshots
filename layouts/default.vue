@@ -33,8 +33,7 @@
                 class="list-item"
               >
                 <img
-                  v-lazy-load
-                  :data-src="getImgUrl(item,false)"
+                  :src="getImgUrl(item,false)"
                   class="shadow"
                   :class="{ 'active': activeIndex === index }"
                 >
@@ -49,8 +48,7 @@
                   @click.native="openLink(index,subIndex)"
                 >
                   <img
-                    v-lazy-load
-                    :data-src="getImgUrl(subItem,true)"
+                    :src="getImgUrl(subItem,true)"
                     :class="{ 'active': activeSubIndex === subIndex }"
                     class="shadow"
                   >

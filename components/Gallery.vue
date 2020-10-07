@@ -17,11 +17,12 @@
           :class="{ 'selected': selectedIndex === index}"
           @click="selectThumbnail(index)"
         >
-          <img
+          <b-img-lazy class="shadow" :src="item.thumbnail" />
+          <!-- <img
             v-lazy-load
             class="shadow"
-            :src="item.thumbnail"
-          >
+            :data-src="item.thumbnail"
+          > -->
         </div>
       </div>
       </figure>
@@ -33,11 +34,7 @@
         class="thumbnail-mobile"
         @click="selectImageMobile(item.src)"
       >
-        <img
-          v-lazy-load
-          class="shadow"
-          :src="item.thumbnail"
-        >
+        <b-img-lazy class="shadow" :src="item.thumbnail" />
       </div>
     </div>
     <b-modal v-model="isImageModalActive" full-screen>

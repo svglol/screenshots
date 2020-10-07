@@ -39,11 +39,14 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/buefy
     'nuxt-buefy',
-    ['nuxt-lazy-load', {
-      directiveOnly: true
-    }],
-    'nuxt-fontawesome'
+    'nuxt-fontawesome',
+    'bootstrap-vue/nuxt'
   ],
+
+  bootstrapVue: {
+    bootstrapCSS: false, // Or `css: false`
+    bootstrapVueCSS: false // Or `bvCSS: false`
+  },
 
   fontawesome: {
     icons: {
