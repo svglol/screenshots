@@ -6,18 +6,20 @@
         <img :src="backgroundImage" style="display:none" @load="backgroundImageLoaded">
       </figure>
       <div
+        id="thumbnails"
         ref="thumbnails"
         class="scrolling-wrapper"
         @wheel="handleScroll"
       >
         <div
           v-for="(item,index) in items"
+          :id="'thumb_'+index"
           :key="item.thumbnail"
           class="thumbnail"
           :class="{ 'selected': selectedIndex === index}"
           @click="selectThumbnail(index)"
         >
-          <b-img-lazy class="shadow" :src="item.thumbnail" blank-src="@/assets/placeholder.webp" />
+          <b-img-lazy class="" :src="item.thumbnail" blank-src="@/assets/placeholder.webp" v-bind="mainProps" />
         </div>
       </div>
       </figure>
@@ -39,6 +41,17 @@
 </template>
 
 <script>
+const VueScrollTo = require('vue-scrollto')
+
+const options = {
+  container: '#thumbnails',
+  easing: 'ease-in',
+  offset: -5,
+  force: true,
+  x: true,
+  y: false
+}
+
 export default {
   props: {
     items: {
@@ -57,7 +70,15 @@ export default {
       selectedIndex: 0,
       mainImage: '',
       backgroundImage: '',
-      isImageModalActive: false
+      isImageModalActive: false,
+      mainProps: {
+        center: true,
+        fluidGrow: true,
+        blank: true,
+        blankColor: '#bbb',
+        width: 214,
+        height: 120
+      }
     }
   },
   watch: {
@@ -66,6 +87,9 @@ export default {
     },
     selectedIndex (newVal) {
       this.loadMainImage(newVal)
+      this.$nextTick(() => {
+        VueScrollTo.scrollTo('#thumb_' + newVal, 500, options)
+      })
     },
     items () {
       this.loadMainImage(this.selectedIndex)
@@ -147,6 +171,7 @@ export default {
   .thumbnail {
     flex: 0 0 auto;
     max-height: 120px;
+    width: 214px;
     margin:.25rem;
     cursor: pointer;
   }
@@ -161,9 +186,9 @@ export default {
   max-height: 120px;
   height: 120px;
   object-fit: contain;
-  width:auto;
-  /* filter: brightness(50%);
--webkit-filter: brightness(50%); */
+   object-position: center;
+  width:214px;
+  filter: drop-shadow(0px 0px 5px rgba(0,0,0,0.30));
 }
 
 .thumbnail:hover img{
@@ -175,8 +200,6 @@ export default {
   position: relative;
   filter: blur(25px);
   height: calc(100vh - 100px - 120px);
- // transform: scale(2);
-  // overflow:hidden;
 }
 
 .loading{

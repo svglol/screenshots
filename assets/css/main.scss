@@ -83,8 +83,14 @@ flex: none!important;
 }
 
 .selected img{
-  outline: 2px solid $primary;
-outline-offset: -6px;
+//   outline: 2px solid $primary;
+// outline-offset: -6px;
+  // -webkit-filter: drop-shadow(-5px -5px $primary);
+  filter:
+  drop-shadow(0 -2px 0 white)
+  drop-shadow(0 2px 0 white)
+  drop-shadow(-2px 0 0 white)
+  drop-shadow(2px 0 0 white)!important;
 }
 
 .modal-content {

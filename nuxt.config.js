@@ -40,7 +40,8 @@ export default {
     // https://go.nuxtjs.dev/buefy
     'nuxt-buefy',
     'nuxt-fontawesome',
-    'bootstrap-vue/nuxt'
+    'bootstrap-vue/nuxt',
+    'vue-scrollto/nuxt'
   ],
 
   bootstrapVue: {
