@@ -1,10 +1,10 @@
 import glob from 'glob'
 
 const generatedRoutes = () => {
-  const files = glob.sync('./assets/images/**/')
+  const files = glob.sync('assets/images/**/')
   const routes = []
   files.forEach((item, i) => {
-    let route = item.replace('./assets/images', '')
+    let route = item.replace('assets/images', '')
     route = route.replace(/ /g, '_')
     routes.push(route)
   })
