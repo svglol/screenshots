@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-if="items.length > 0" class="gallery is-hidden-mobile">
-      <figure :class="{ 'loading': isLoading}" class="main-image-box shadow" @click="isImageModalActive = true">
+    <div v-if="items.length > 0" class="gallery">
+      <figure :class="{ 'loading': isLoading}" class="main-image-box" @click="isImageModalActive = true">
         <img :src="mainImage" class="main-image">
         <img :src="backgroundImage" style="display:none" @load="backgroundImageLoaded">
       </figure>
@@ -23,16 +23,6 @@
         </div>
       </div>
       </figure>
-    </div>
-    <div class="is-hidden-tablet" style="margin:1.5rem;width:100vw">
-      <div
-        v-for="(item) in items"
-        :key="item.thumbnail"
-        class="thumbnail-mobile"
-        @click="selectImageMobile(item.src)"
-      >
-        <b-img-lazy class="shadow" :src="item.thumbnail" blank-src="@/assets/placeholder.webp" />
-      </div>
     </div>
     <b-modal v-model="isImageModalActive" full-screen>
       <img :src="mainImage" class="modal-image">
@@ -147,6 +137,62 @@ export default {
   flex-direction: column;
 }
 
+@media screen and (max-width: 1023px)  and (orientation:landscape){
+
+  .gallery{
+    margin-left:1.2rem
+  }
+  .thumbnail{
+    max-height: 60px!important;
+    height: 60px!important;
+    width: 120px!important;
+  }
+
+  .thumbnail img{
+    max-height: 60px!important;
+    height: 60px!important;
+      width: 120px!important;
+  }
+
+  .main-image{
+    max-height: calc(100vh)!important;
+  }
+
+  .scrolling-wrapper{
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+  }
+}
+
+@media screen and (max-width: 1023px)  and (orientation:portrait){
+.gallery{
+  width: 100vw;
+  height: calc(100vh - 30px);
+  margin-left:1.2rem
+}
+
+.main-image{
+  max-height: calc(100vh - 120px)!important;
+}
+
+.thumbnail{
+  max-height: 60px!important;
+  height: 60px!important;
+  width: 120px!important;
+}
+
+.thumbnail img{
+  max-height: 60px!important;
+  height: 60px!important;
+    width: 120px!important;
+}
+
+.scrolling-wrapper{
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+}
+}
+
 .modal-image{
   padding: 1rem;
   max-height: 100vh;
@@ -174,12 +220,6 @@ export default {
     width: 214px;
     margin:.25rem;
     cursor: pointer;
-  }
-
-  .thumbnail-mobile img{
-    width: 98%;
-    object-fit:contain;
-    margin-bottom: .5rem;
   }
 
 .thumbnail img{
