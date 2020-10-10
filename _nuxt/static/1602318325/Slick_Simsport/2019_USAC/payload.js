@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/Slick_Simsport/2019_USAC", {data:[{}],fetch:[],mutations:void 0});

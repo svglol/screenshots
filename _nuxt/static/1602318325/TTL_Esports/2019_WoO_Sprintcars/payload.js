@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/TTL_Esports/2019_WoO_Sprintcars", {data:[{}],fetch:[],mutations:void 0});
