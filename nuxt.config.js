@@ -6,7 +6,7 @@ glob('assets/images/**/', function (er, files) {
   if (er) { throw er }
   files.forEach((item, i) => {
     let route = item.replace('assets/images', '')
-    route = route.replace(' ', '_')
+    route = route.replace(/ /g, '_')
     generatedRoutes.push(route)
   })
 })
