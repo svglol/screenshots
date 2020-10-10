@@ -1,15 +1,15 @@
 import glob from 'glob'
 
-const generatedRoutes = []
-
-glob('./assets/images/**/', function (er, files) {
-  if (er) { throw er }
+const generatedRoutes = () => {
+  const files = glob.sync('./assets/images/**/')
+  const routes = []
   files.forEach((item, i) => {
-    let route = item.replace('assets/images', '')
+    let route = item.replace('./assets/images', '')
     route = route.replace(/ /g, '_')
-    generatedRoutes.push(route)
+    routes.push(route)
   })
-})
+  return routes
+}
 
 export default {
   // Target (https://go.nuxtjs.dev/config-target)
