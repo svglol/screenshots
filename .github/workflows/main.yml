@@ -1,17 +1,40 @@
-name: Generate Site
+name: github pages
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the main branch
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - master
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  build-deploy:
+    runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v1
-      - uses: kappa0923/nuxtjs-generate-action@v0.1.0
+    - uses: actions/checkout@v2
+
+    - name: setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '13.x'
+
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: install
+      run: npm ci
+
+    - name: test
+      run: npm test
+
+    - name: generate
+      run: npm run generate
+
+    - name: deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
