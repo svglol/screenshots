@@ -88,7 +88,7 @@ export default {
     selectedIndex (newVal) {
       this.loadMainImage(newVal)
       this.$nextTick(() => {
-        VueScrollTo.scrollTo('#thumb_' + newVal, 500, options)
+        VueScrollTo.scrollTo('#thumb_' + newVal, 200, options)
       })
     },
     items () {
