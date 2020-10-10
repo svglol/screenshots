@@ -45,7 +45,8 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
-    '@nuxtjs/fontawesome'
+    '@nuxtjs/fontawesome',
+    '@nuxtjs/google-fonts'
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -60,6 +61,13 @@ export default {
   bootstrapVue: {
     bootstrapCSS: false, // Or `css: false`
     bootstrapVueCSS: false // Or `bvCSS: false`
+  },
+
+  googleFonts: {
+    families: {
+      Oswald: true
+    },
+    display: 'swap'
   },
 
   fontawesome: {

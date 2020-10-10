@@ -16,6 +16,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-brands-svg-icons": "^5.15.1",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@nuxtjs/google-fonts": "^1.0.3",
     "bootstrap-vue": "^2.17.3",
     "core-js": "^3.6.5",
     "glob": "^7.1.6",
