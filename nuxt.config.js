@@ -1,3 +1,16 @@
+const glob = require('glob')
+
+const generatedRoutes = []
+
+glob('assets/images/**/', function (er, files) {
+  if (er) { throw er }
+  files.forEach((item, i) => {
+    let route = item.replace('assets/images', '')
+    route = route.replace(' ', '_')
+    generatedRoutes.push(route)
+  })
+})
+
 export default {
   // Target (https://go.nuxtjs.dev/config-target)
   target: 'static',
@@ -61,6 +74,7 @@ export default {
   },
 
   generate: {
-    fallback: true
+    fallback: true,
+    routes: generatedRoutes
   }
 }
