@@ -61,6 +61,6 @@ export default {
   },
 
   generate: {
-    fallback: '200.html'
+    fallback: true
   }
 }
