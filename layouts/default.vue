@@ -14,7 +14,6 @@
                   <font-awesome-icon :icon="['fab',item.icon]" />
                 </a>
               </li>
-              </a>
             </ul>
           </div>
         </div>
@@ -48,7 +47,6 @@
                 </nuxt-link>
               </li>
             </ul>
-            </nuxt-link>
           </li>
         </ul>
       </div>
@@ -68,7 +66,6 @@
                 <font-awesome-icon :icon="['fab',item.icon]" />
               </a>
             </li>
-            </a>
           </ul>
         </template>
         <template slot="start">
@@ -88,8 +85,6 @@
         <nuxt />
       </div>
     </section>
-  </div>
-  </section>
   </div>
 </template>
 

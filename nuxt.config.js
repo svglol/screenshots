@@ -1,4 +1,4 @@
-const glob = require('glob')
+import glob from 'glob'
 
 const generatedRoutes = []
 

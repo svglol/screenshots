@@ -22,7 +22,6 @@
           <b-img-lazy class="" :src="item.thumbnail" blank-src="@/assets/placeholder.webp" v-bind="mainProps" />
         </div>
       </div>
-      </figure>
     </div>
     <b-modal v-model="isImageModalActive" full-screen>
       <img :src="mainImage" class="modal-image">
