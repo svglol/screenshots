@@ -34,7 +34,6 @@ jobs:
       run: npm run generate
 
     - name: deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist
+      run: npm run deploy
+    env:
+     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
