@@ -2,10 +2,10 @@ import data from './static/data.json'
 const generatedRoutes = () => {
   const routes = []
   data.images.forEach((item) => {
-    routes.push('/' + item.folder)
+    routes.push('/' + item.folder.replace(/ /g, '_'))
     if (item.subfolders) {
       item.subfolders.forEach((subItem) => {
-        routes.push('/' + item.folder + '/' + subItem.subfolder)
+        routes.push('/' + item.folder.replace(/ /g, '_') + '/' + subItem.subfolder.replace(/ /g, '_'))
       })
     }
   })
