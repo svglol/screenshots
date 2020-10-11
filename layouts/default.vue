@@ -104,87 +104,34 @@ export default {
     }
   },
   mounted () {
-    this.importAll(require.context('../assets/webp/', true, /\.webp$/))
-  },
-  methods: {
-    importAll (r) {
-      r.keys().forEach((item, i) => {
-        const folders = []
-        if (!item.includes('_thumb')) {
-          const image = item
-          const n = image.lastIndexOf('.')
-          const thumbnail = image.substr(0, n) + '_thumb' + image.substr(n)
+    // this.importAll(require.context('../assets/webp/', true, /\.webp$/))
+    this.images = this.$store.state.images
 
-          let path = item
-          path.indexOf(1)
-          path = path.split('/')
-          path.forEach((item, i) => {
-            if (item !== '.' && item.match(/\.(jpeg|jpg|png|gif|webp)/g) === null) {
-              folders.push(item)
-            }
-          })
-
-          const folder = folders[0]
-          const subfolder = folders[1]
-          // set into map by folder
-          let imageSet = this.images.find(el => el.folder === folder)
-          if (imageSet) {
-            imageSet.images.push({ image: r(item), thumbnail: r(thumbnail) })
-          } else {
-            const images = [{ image: r(item), thumbnail: r(thumbnail) }]
-            this.images.push({ folder, images, subfolders: [] })
+    // Get Active index/subindex
+    const paths = this.$route.params.pathMatch.split('/')
+    paths.forEach((path, i) => {
+      path = path.replace(/_/g, ' ')
+      if (i === 0) {
+        // active index
+        this.images.forEach((item, j) => {
+          if (item.folder === path) {
+            this.activeIndex = j
           }
-
-          imageSet = this.images.find(el => el.folder === folder)
-          // set into subfolders
-          if (subfolder) {
-            const subImageSet = imageSet.subfolders.find(el => el.subfolder === subfolder)
-            if (subImageSet) {
-              subImageSet.images.push({ image: r(item), thumbnail: r(thumbnail) })
-            } else {
-              const images = [{ image: r(item), thumbnail: r(thumbnail) }]
-              imageSet.subfolders.push({ subfolder, images })
-            }
-          }
-        }
-      })
-
-      // add all images to an all image link
-      const allImages = []
-      r.keys().forEach((item, i) => {
-        if (!item.includes('_thumb')) {
-          const image = item
-          const n = image.lastIndexOf('.')
-          const thumbnail = image.substr(0, n) + '_thumb' + image.substr(n)
-          allImages.push({ image: r(item), thumbnail: r(thumbnail) })
-        }
-      })
-      this.images.unshift({ folder: 'all', images: allImages })
-
-      // Get Active index/subindex
-      // console.log(this.$route.params.pathMatch)
-      const paths = this.$route.params.pathMatch.split('/')
-      paths.forEach((path, i) => {
-        path = path.replace(/_/g, ' ')
-        if (i === 0) {
-          // active index
-          this.images.forEach((item, j) => {
-            if (item.folder === path) {
-              this.activeIndex = j
-            }
-          })
-        } else if (i === 1) {
-          // active subindex
+        })
+      } else if (i === 1) {
+        // active subindex
+        if (this.images[this.activeIndex]) {
           this.images[this.activeIndex].subfolders.forEach((item, j) => {
             if (item.subfolder === path) {
               this.activeSubIndex = j
             }
           })
         }
-      })
-    },
+      }
+    })
+  },
+  methods: {
     getImgUrl (item, subItem) {
-      // console.log(item)
       // get thumbnail image
       let num = 0
       if (subItem) {

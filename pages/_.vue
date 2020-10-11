@@ -16,18 +16,20 @@ export default {
   },
   mounted () {
     const route = this.$route
-    const images = []
-    const r = require.context('../assets/webp/', true, /\.webp$/)
     const path = route.path.replace(/_/g, ' ')
-    r.keys().forEach((item, i) => {
-      if (item.includes(path) && !item.includes('_thumb')) {
-        const image = item
-        const n = image.lastIndexOf('.')
-        const result = image.substr(0, n) + '_thumb' + image.substr(n)
-        images.push({ src: r(item), thumbnail: r(result) })
+    const paths = path.split('/')
+
+    if (paths) {
+      if (paths[1]) {
+        const result = this.$store.state.images.find(item => item.folder === paths[1])
+        if (paths[2]) {
+          if (result) { this.images = result.subfolders.find(item => item.subfolder === paths[2]).images }
+        } else if (result) { this.images = result.images }
+      } else {
+        this.images = this.$store.state.images.find(item => item.folder === 'all').images
       }
-    })
-    this.images = images
+    }
+    // this.images = images
     if (route.query.image) {
       this.selectedImage = parseInt(route.query.image)
     }

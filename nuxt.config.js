@@ -1,13 +1,15 @@
-import glob from 'glob'
-
+import data from './static/data.json'
 const generatedRoutes = () => {
-  const files = glob.sync('./assets/images/**/')
   const routes = []
-  files.forEach((item, i) => {
-    let route = item.replace('./assets/images', '')
-    route = route.replace(/ /g, '_')
-    routes.push(route)
+  data.images.forEach((item) => {
+    routes.push('/' + item.folder)
+    if (item.subfolders) {
+      item.subfolders.forEach((subItem) => {
+        routes.push('/' + item.folder + '/' + subItem.subfolder)
+      })
+    }
   })
+  routes.push('/')
   return routes
 }
 
