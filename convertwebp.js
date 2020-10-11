@@ -14,16 +14,31 @@ glob('assets/images/**/*.png', function (er, files) {
     const fileName = path.parse(item)
     let filePath = fileName.dir.replace('/images/', '/webp/')
     fs.mkdirSync(filePath, { recursive: true })
-    sharp(item)
-      .withMetadata()
-      .toFile(filePath + '/' + fileName.name + '.webp')
-      .then((info) => { bar.tick() })
 
-    sharp(item)
-      .resize({ width: 450 })
-      .toFile(filePath + '/' + fileName.name + '_thumb.webp', (err, info) => {
-        if (err) { throw err }
-      })
+    try {
+      if (!fs.existsSync(filePath + '/' + fileName.name + '.webp')) {
+        sharp(item)
+          .withMetadata()
+          .toFile(filePath + '/' + fileName.name + '.webp')
+          .then((info) => { bar.tick() })
+      } else {
+        bar.tick()
+      }
+    } catch (err) {
+      console.error(err)
+    }
+
+    try {
+      if (!fs.existsSync(filePath + '/' + fileName.name + '_thumb.webp')) {
+        sharp(item)
+          .resize({ width: 450 })
+          .toFile(filePath + '/' + fileName.name + '_thumb.webp', (err, info) => {
+            if (err) { throw err }
+          })
+      }
+    } catch (err) {
+      console.error(err)
+    }
 
     filePath = filePath.replace('assets/webp/', '')
     const _src = filePath + '/' + fileName.name + '.webp'
