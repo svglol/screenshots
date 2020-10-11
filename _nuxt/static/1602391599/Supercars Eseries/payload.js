@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/Supercars Eseries", {data:[{}],fetch:[],mutations:[]});

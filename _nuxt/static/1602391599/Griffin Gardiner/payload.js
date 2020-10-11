@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/Griffin Gardiner", {data:[{}],fetch:[],mutations:[]});

@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/Slick_Simsport", {data:[{}],fetch:[],mutations:[]});

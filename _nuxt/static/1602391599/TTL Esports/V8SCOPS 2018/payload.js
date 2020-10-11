@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/TTL Esports/V8SCOPS 2018", {data:[{}],fetch:[],mutations:[]});

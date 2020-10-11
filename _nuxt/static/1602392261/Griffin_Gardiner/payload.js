@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/Griffin_Gardiner", {data:[{}],fetch:[],mutations:[]});

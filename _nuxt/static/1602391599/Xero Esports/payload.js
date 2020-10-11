@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/Xero Esports", {data:[{}],fetch:[],mutations:[]});
