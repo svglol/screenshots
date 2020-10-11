@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/Trans Tasman Racing", {data:[{}],fetch:[],mutations:[]});

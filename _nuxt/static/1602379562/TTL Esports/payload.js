@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/TTL Esports", {data:[{}],fetch:[],mutations:[]});

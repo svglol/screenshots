@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/Jake Burton", {data:[{}],fetch:[],mutations:[]});
