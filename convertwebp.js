@@ -39,10 +39,10 @@ glob('assets/images/**/*.png', function (er, files) {
     } catch (err) {
       console.error(err)
     }
-
     filePath = filePath.replace('assets/webp/', '')
     const _src = filePath + '/' + fileName.name + '.webp'
     const _thumbnail = filePath + '/' + fileName.name + '_thumb.webp'
+    const { mtimeMs } = fs.statSync('./' + item)
 
     const folders = []
 
@@ -61,9 +61,9 @@ glob('assets/images/**/*.png', function (er, files) {
     // set into map by folder
     let imageSet = imagesArr.find(el => el.folder === folder)
     if (imageSet) {
-      imageSet.images.push({ src: _src, thumbnail: _thumbnail })
+      imageSet.images.push({ src: _src, thumbnail: _thumbnail, time: mtimeMs })
     } else {
-      const images = [{ src: _src, thumbnail: _thumbnail }]
+      const images = [{ src: _src, thumbnail: _thumbnail, time: mtimeMs }]
       imagesArr.push({ folder, images, subfolders: [] })
     }
 
@@ -72,16 +72,25 @@ glob('assets/images/**/*.png', function (er, files) {
     if (subfolder) {
       const subImageSet = imageSet.subfolders.find(el => el.subfolder === subfolder)
       if (subImageSet) {
-        subImageSet.images.push({ src: _src, thumbnail: _thumbnail })
+        subImageSet.images.push({ src: _src, thumbnail: _thumbnail, time: mtimeMs })
       } else {
-        const images = [{ src: _src, thumbnail: _thumbnail }]
+        const images = [{ src: _src, thumbnail: _thumbnail, time: mtimeMs }]
         imageSet.subfolders.push({ subfolder, images })
       }
     }
-    allImages.push({ src: _src, thumbnail: _thumbnail })
+    allImages.push({ src: _src, thumbnail: _thumbnail, time: mtimeMs })
   })
 
   imagesArr.unshift({ folder: 'all', images: allImages })
+
+  imagesArr.forEach((item) => {
+    item.images.sort(function (a, b) { return b.time - a.time })
+    if (item.subfolders) {
+      item.subfolders.forEach((sub) => {
+        sub.images.sort(function (a, b) { return b.time - a.time })
+      })
+    }
+  })
 
   fs.writeFile('./static/data.json', JSON.stringify({ images: imagesArr }), function (err) {
     if (err) {
