@@ -12,7 +12,7 @@ glob('assets/images/**/*.png', function (er, files) {
   const allImages = []
   files.forEach((item, i) => {
     const fileName = path.parse(item)
-    const filePath = fileName.dir.replace('/images/', '/webp/')
+    let filePath = fileName.dir.replace('/images/', '/webp/')
     fs.mkdirSync(filePath, { recursive: true })
     sharp(item)
       .withMetadata()
@@ -25,7 +25,7 @@ glob('assets/images/**/*.png', function (er, files) {
         if (err) { throw err }
       })
 
-    // filePath = filePath.replace('assets/', './_nuxt/assets/')
+    filePath = filePath.replace('assets/webp/', '')
     const _src = filePath + '/' + fileName.name + '.webp'
     const _thumbnail = filePath + '/' + fileName.name + '_thumb.webp'
 

@@ -140,7 +140,7 @@ export default {
         num = Math.floor(0.34 * (item.images.length))
       }
       const image = item.images[num].thumbnail
-      return image
+      return require(`../assets/webp/${image}`)
     },
     openLink (index, subIndex) {
       this.activeIndex = index

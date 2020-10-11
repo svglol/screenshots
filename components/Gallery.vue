@@ -2,8 +2,8 @@
   <div>
     <div v-if="items.length > 0" class="gallery">
       <figure :class="{ 'loading': isLoading}" class="main-image-box" @click="isImageModalActive = true">
-        <img :src="mainImage" class="main-image">
-        <img :src="backgroundImage" style="display:none" @load="backgroundImageLoaded">
+        <img :src="require(`../assets/webp/${mainImage}`)" class="main-image">
+        <img :src="require(`../assets/webp/${backgroundImage}`)" style="display:none" @load="backgroundImageLoaded">
       </figure>
       <div
         id="thumbnails"
@@ -19,12 +19,12 @@
           :class="{ 'selected': selectedIndex === index}"
           @click="selectThumbnail(index)"
         >
-          <b-img-lazy class="" :src="item.thumbnail" blank-src="@/assets/placeholder.webp" v-bind="mainProps" />
+          <b-img-lazy class="" :src="require(`../assets/webp/${item.thumbnail}`)" blank-src="@/assets/placeholder.webp" v-bind="mainProps" />
         </div>
       </div>
     </div>
     <b-modal v-model="isImageModalActive" full-screen>
-      <img :src="mainImage" class="modal-image">
+      <img v-if="mainImage !== ''" :src="require(`../assets/webp/${mainImage}`)" class="modal-image">
     </b-modal>
   </div>
 </template>

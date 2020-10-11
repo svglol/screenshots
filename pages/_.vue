@@ -33,14 +33,6 @@ export default {
     if (route.query.image) {
       this.selectedImage = parseInt(route.query.image)
     }
-  },
-  methods: {
-    getImgUrl (value) {
-      const image = this.images[value]
-      const n = image.lastIndexOf('/')
-      const result = image.substr(0, n) + '/thumb' + image.substr(n)
-      return result
-    }
   }
 }
 
