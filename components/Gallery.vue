@@ -1,9 +1,8 @@
 <template>
   <div>
     <div v-if="items.length > 0" class="gallery">
-      <figure :class="{ 'loading': isLoading}" class="main-image-box" @click="isImageModalActive = true">
-        <img :src="require(`../assets/webp/${mainImage}`)" class="main-image">
-        <img :src="require(`../assets/webp/${backgroundImage}`)" style="display:none" @load="backgroundImageLoaded">
+      <figure class="main-image-box" @click="isImageModalActive = true">
+        <MainImage :image="items[selectedIndex]" />
       </figure>
       <div
         id="thumbnails"
@@ -14,17 +13,17 @@
         <div
           v-for="(item,index) in items"
           :id="'thumb_'+index"
-          :key="item.thumbnail"
+          :key="item.src"
           class="thumbnail"
           :class="{ 'selected': selectedIndex === index}"
           @click="selectThumbnail(index)"
         >
-          <b-img-lazy class="" :src="require(`../assets/webp/${item.thumbnail}`)" blank-src="@/assets/placeholder.webp" v-bind="mainProps" />
+          <b-img-lazy class="" :src="require(`../assets/webp/${item.src300}`)" blank-src="@/assets/placeholder.webp" v-bind="mainProps" />
         </div>
       </div>
     </div>
     <b-modal v-model="isImageModalActive" full-screen>
-      <img v-if="mainImage !== ''" :src="require(`../assets/webp/${mainImage}`)" class="modal-image">
+      <MainImage :image="items[selectedIndex]" class="modal-image" fullscreen />
     </b-modal>
   </div>
 </template>
@@ -55,10 +54,7 @@ export default {
   },
   data () {
     return {
-      isLoading: true,
       selectedIndex: 0,
-      mainImage: '',
-      backgroundImage: '',
       isImageModalActive: false,
       mainProps: {
         center: true,
@@ -75,13 +71,9 @@ export default {
       this.selectedIndex = newVal
     },
     selectedIndex (newVal) {
-      this.loadMainImage(newVal)
       this.$nextTick(() => {
         VueScrollTo.scrollTo('#thumb_' + newVal, 200, options)
       })
-    },
-    items () {
-      this.loadMainImage(this.selectedIndex)
     }
   },
   mounted () {
@@ -100,28 +92,10 @@ export default {
         history.replaceState({}, null, url + '?image=' + index)
       }
     },
-    onImgLoad () {
-      this.isLoading = false
-    },
     handleScroll (e) {
       e = window.event || e
       const delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)))
       this.$refs.thumbnails.scrollLeft -= (delta * 222)
-    },
-    backgroundImageLoaded () {
-      this.mainImage = this.backgroundImage
-      this.isLoading = false
-    },
-    loadMainImage (newVal) {
-      if (this.items.length > 0) {
-        this.isLoading = true
-        this.mainImage = this.items[newVal].thumbnail
-        this.backgroundImage = this.items[newVal].src
-      }
-    },
-    selectImageMobile (src) {
-      this.mainImage = src
-      this.isImageModalActive = true
     }
   }
 }
@@ -199,10 +173,11 @@ export default {
   margin-right: auto;
 }
 
-.main-image{
+.main-image-box img{
   max-width: 100%;
   object-fit: contain;
   max-height: calc(100vh - 100px - 120px);
+  height: calc(100vh - 100px - 120px);
   display: block;
 }
 

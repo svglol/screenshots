@@ -29,19 +29,46 @@ glob('assets/images/**/*.png', function (er, files) {
     }
 
     try {
-      if (!fs.existsSync(filePath + '/' + fileName.name + '_thumb.webp')) {
+      if (!fs.existsSync(filePath + '/' + fileName.name + '_300.webp')) {
         sharp(item)
-          .resize({ width: 450 })
-          .toFile(filePath + '/' + fileName.name + '_thumb.webp', (err, info) => {
+          .resize({ width: 300 })
+          .toFile(filePath + '/' + fileName.name + '_300.webp', (err, info) => {
             if (err) { throw err }
           })
       }
     } catch (err) {
       console.error(err)
     }
+
+    try {
+      if (!fs.existsSync(filePath + '/' + fileName.name + '_1000.webp')) {
+        sharp(item)
+          .resize({ width: 1000 })
+          .toFile(filePath + '/' + fileName.name + '_1000.webp', (err, info) => {
+            if (err) { throw err }
+          })
+      }
+    } catch (err) {
+      console.error(err)
+    }
+
+    try {
+      if (!fs.existsSync(filePath + '/' + fileName.name + '_2000.webp')) {
+        sharp(item)
+          .resize({ width: 2000 })
+          .toFile(filePath + '/' + fileName.name + '_2000.webp', (err, info) => {
+            if (err) { throw err }
+          })
+      }
+    } catch (err) {
+      console.error(err)
+    }
+
     filePath = filePath.replace('assets/webp/', '')
     const _src = filePath + '/' + fileName.name + '.webp'
-    const _thumbnail = filePath + '/' + fileName.name + '_thumb.webp'
+    const _300 = filePath + '/' + fileName.name + '_300.webp'
+    const _1000 = filePath + '/' + fileName.name + '_1000.webp'
+    const _2000 = filePath + '/' + fileName.name + '_2000.webp'
     const { mtimeMs } = fs.statSync('./' + item)
 
     const folders = []
@@ -61,9 +88,9 @@ glob('assets/images/**/*.png', function (er, files) {
     // set into map by folder
     let imageSet = imagesArr.find(el => el.folder === folder)
     if (imageSet) {
-      imageSet.images.push({ src: _src, thumbnail: _thumbnail, time: mtimeMs })
+      imageSet.images.push({ src: _src, src300: _300, src1000: _1000, src2000: _2000, time: mtimeMs })
     } else {
-      const images = [{ src: _src, thumbnail: _thumbnail, time: mtimeMs }]
+      const images = [{ src: _src, src300: _300, src1000: _1000, src2000: _2000, time: mtimeMs }]
       imagesArr.push({ folder, images, subfolders: [] })
     }
 
@@ -72,13 +99,13 @@ glob('assets/images/**/*.png', function (er, files) {
     if (subfolder) {
       const subImageSet = imageSet.subfolders.find(el => el.subfolder === subfolder)
       if (subImageSet) {
-        subImageSet.images.push({ src: _src, thumbnail: _thumbnail, time: mtimeMs })
+        subImageSet.images.push({ src: _src, src300: _300, src1000: _1000, src2000: _2000, time: mtimeMs })
       } else {
-        const images = [{ src: _src, thumbnail: _thumbnail, time: mtimeMs }]
+        const images = [{ src: _src, src300: _300, src1000: _1000, src2000: _2000, time: mtimeMs }]
         imageSet.subfolders.push({ subfolder, images })
       }
     }
-    allImages.push({ src: _src, thumbnail: _thumbnail, time: mtimeMs })
+    allImages.push({ src: _src, src300: _300, src1000: _1000, src2000: _2000, time: mtimeMs })
   })
 
   imagesArr.unshift({ folder: 'all', images: allImages })

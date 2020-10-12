@@ -104,7 +104,6 @@ export default {
     }
   },
   mounted () {
-    // this.importAll(require.context('../assets/webp/', true, /\.webp$/))
     this.images = this.$store.state.images
 
     // Get Active index/subindex
@@ -139,7 +138,7 @@ export default {
       } else {
         num = Math.floor(0.34 * (item.images.length))
       }
-      const image = item.images[num].thumbnail
+      const image = item.images[num].src300
       return require(`../assets/webp/${image}`)
     },
     openLink (index, subIndex) {
