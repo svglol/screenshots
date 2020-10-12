@@ -112,9 +112,6 @@ export default {
 
 @media screen and (max-width: 1023px)  and (orientation:landscape){
 
-  .gallery{
-    margin-left:1.2rem
-  }
   .thumbnail{
     max-height: 60px!important;
     height: 60px!important;
@@ -131,17 +128,13 @@ export default {
     max-height: calc(100vh)!important;
   }
 
-  .scrolling-wrapper{
-    margin-left: -0.5rem;
-    margin-right: -0.5rem;
-  }
 }
 
-@media screen and (max-width: 1023px)  and (orientation:portrait){
+@media screen and (max-width: 768px) {
 .gallery{
   width: 100vw;
-  height: calc(100vh - 30px);
-  margin-left:1.2rem
+  height: calc(100vh - 56px);
+  margin-left:.7rem
 }
 
 .main-image{
@@ -160,10 +153,6 @@ export default {
     width: 120px!important;
 }
 
-.scrolling-wrapper{
-  margin-left: -0.5rem;
-  margin-right: -0.5rem;
-}
 }
 
 .modal-image{

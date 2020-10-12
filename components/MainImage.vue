@@ -79,7 +79,6 @@ export default {
 }
 
 .fullscreen{
-  height: 100vw;
   width: 100vw;
   object-fit: contain;
 }
