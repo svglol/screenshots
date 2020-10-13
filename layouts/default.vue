@@ -28,10 +28,8 @@
               exact-active-class="is-active"
               @click.native="openLink(index)"
             >
-              <div
-                class="list-item"
-              >
-                <b-img-lazy class="shadow" :src="getImgUrl(item,false)" blank-src="@/assets/placeholder.webp" :class="{ 'active': activeIndex === index }" />
+              <div class="list-item">
+                <b-img-lazy class="shadow" :src="getImgUrl(item,false)" blank-src="@/assets/placeholder.webp" />
                 <span class="menu-item">  {{ item.folder }} </span>
               </div>
             </nuxt-link>
@@ -42,8 +40,10 @@
                   exact-active-class="is-active"
                   @click.native="openLink(index,subIndex)"
                 >
-                  <b-img-lazy class="shadow" :src="getImgUrl(subItem,true)" blank-src="@/assets/placeholder.webp" :class="{ 'active': activeSubIndex === subIndex }" />
-                  <span class="sub-menu-item">  {{ subItem.subfolder }} </span>
+                  <div class="list-item">
+                    <b-img-lazy class="shadow" :src="getImgUrl(subItem,true)" blank-src="@/assets/placeholder.webp" />
+                    <span class="sub-menu-item">  {{ subItem.subfolder }} </span>
+                  </div>
                 </nuxt-link>
               </li>
             </ul>
@@ -222,16 +222,16 @@ object-fit: cover;
 }
 
 .submenu li:hover img {
-  filter: brightness(6%);
+  filter: brightness(40%);
 -webkit-filter: brightness(40%);
 }
 
 .list-item:hover img{
-  filter: brightness(60%);
+  filter: brightness(40%);
 -webkit-filter: brightness(40%);
 }
 
-.active{
+.is-active img{
   filter: brightness(60%)!important;
 -webkit-filter: brightness(60%)!important;
 }
