@@ -28,8 +28,8 @@ $black: #333;
 html {
   overflow-y: hidden; /* Hide vertical scrollbar */
   scroll-behavior: smooth;
-  background-color: #4d4d4d;
-  background-image: url("../bg.webp");
+  background: rgb(40,40,59);
+  background: linear-gradient(128deg, rgba(40,40,59,1) 0%, rgba(57,76,93,1) 100%);
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
      -khtml-user-select: none; /* Konqueror HTML */
@@ -37,6 +37,7 @@ html {
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
+  height: 100%;
 }
 
 

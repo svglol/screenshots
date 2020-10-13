@@ -179,6 +179,7 @@ $primary: #dddddd;
   margin-left: .75rem;
   height: calc(100vh);
   overflow-y:auto;
+  overflow-x:hidden;
 }
 
 .navbar.is-primary{
