@@ -180,6 +180,8 @@ $primary: #dddddd;
   height: calc(100vh);
   overflow-y:auto;
   overflow-x:hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #dddddd #181d26;
 }
 
 .navbar.is-primary{

@@ -175,6 +175,8 @@ export default {
   flex-wrap: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
+  scrollbar-width: thin;
+   scrollbar-color: #dddddd #181d26;
 }
 
   .thumbnail {
