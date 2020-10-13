@@ -105,4 +105,23 @@ background-color: rgba(0, 0, 0, 0.8);
 html{
   overflow-y: auto;
 }
+
+.navbar-menu {
+  display: block;
+  opacity: 0;
+
+  position: absolute;   /* or float: left; width: 100%;*/
+  left: 0;
+  right: 0;
+
+  transform: translateY(-50%);
+  transition: all .4s ease-in-out;
+  pointer-events: none;
+}
+
+.navbar-menu.is-active {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
 }
