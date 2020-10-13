@@ -84,12 +84,12 @@ export default {
         this.isLoading = true
         this.selectedIndex = index
         let url = ''
-        if (JSON.stringify(window.location).includes('?')) {
-          url = window.location.href.split('?')[0]
+        if (JSON.stringify(window.location).includes('#')) {
+          url = window.location.href.split('#')[0]
         } else {
           url = window.location
         }
-        history.replaceState({}, null, url + '?image=' + index)
+        history.replaceState({}, null, url + '#' + index)
       }
     },
     handleScroll (e) {

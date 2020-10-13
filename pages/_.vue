@@ -29,9 +29,9 @@ export default {
         this.images = this.$store.state.images.find(item => item.folder === 'all').images
       }
     }
-    // this.images = images
-    if (route.query.image) {
-      this.selectedImage = parseInt(route.query.image)
+
+    if (parseInt(route.hash.replace('#', ''))) {
+      this.selectedImage = parseInt(route.hash.replace('#', ''))
     }
   }
 }
