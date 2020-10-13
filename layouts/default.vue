@@ -33,7 +33,7 @@
                 <span class="menu-item">  {{ item.folder }} </span>
               </div>
             </nuxt-link>
-            <ul v-show="activeIndex === index" class="submenu">
+            <ul class="submenu" :class="{ 'submenu-active': activeIndex === index }">
               <li v-for="(subItem,subIndex) in item.subfolders" :key="subItem.subfolder">
                 <nuxt-link
                   :to="generateLink(images[index].folder, images[index].subfolders[subIndex].subfolder)"
@@ -262,6 +262,20 @@ object-fit: cover;
   transform: translate(-50%, -50%);
     text-transform: uppercase;
     font-size: 100%;
+}
+
+.submenu{
+  opacity: 0;
+ transition: all .3s ease-in-out;
+   transform: translateX(50%);
+   height: 0;
+}
+
+.submenu-active {
+  visibility: visible;
+  opacity: 1;
+  transform:none;
+  height: 100%;
 }
 
 .main-content{
