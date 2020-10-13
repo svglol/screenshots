@@ -79,7 +79,7 @@ glob('assets/images/**/*.png', function (er, files) {
     _path = _path.split('/')
     _path.forEach((item, i) => {
       if (item !== '.' && item.match(/\.(jpeg|jpg|png|gif|webp)/g) === null) {
-        folders.push(item)
+        folders.push(item.toLowerCase())
       }
     })
 
