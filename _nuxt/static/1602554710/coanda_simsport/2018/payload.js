@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/coanda_simsport/2018", {data:[{}],fetch:[],mutations:[]});

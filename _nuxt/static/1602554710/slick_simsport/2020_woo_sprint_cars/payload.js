@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/slick_simsport/2020_woo_sprint_cars", {data:[{}],fetch:[],mutations:[]});

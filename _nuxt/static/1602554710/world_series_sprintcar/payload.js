@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/world_series_sprintcar", {data:[{}],fetch:[],mutations:[]});

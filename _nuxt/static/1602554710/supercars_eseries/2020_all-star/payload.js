@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/supercars_eseries/2020_all-star", {data:[{}],fetch:[],mutations:[]});

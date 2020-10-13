@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/Supercars_Eseries/2019_Pro", {data:[{}],fetch:[],mutations:[]});
