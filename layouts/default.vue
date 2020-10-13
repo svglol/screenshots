@@ -314,11 +314,12 @@ hr {
 
 .navbar-item, .navbar-link{
   margin-left: 1rem;
-  color:$primary;
+  color:darken($primary,30%);
   text-transform: uppercase;
 }
 
 a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover, a.navbar-item.is-active, .navbar-link:focus, .navbar-link:focus-within, .navbar-link:hover, .navbar-link.is-active {
     background-color: rgba(0,0,0,0.2);
+    color: white;
 }
 </style>

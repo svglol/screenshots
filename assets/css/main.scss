@@ -81,9 +81,6 @@ flex: none!important;
 }
 
 .selected img{
-//   outline: 2px solid $primary;
-// outline-offset: -6px;
-  // -webkit-filter: drop-shadow(-5px -5px $primary);
   filter:
   drop-shadow(0 -2px 0 white)
   drop-shadow(0 2px 0 white)
@@ -99,8 +96,10 @@ flex: none!important;
 }
 
 @media screen and (max-width: 1023px){
-.navbar-menu {
-  background-color: rgba(0,0,0,0.1);
+.navbar-menu{
+  position: absolute;
+width: 100%;
+background-color: rgba(0, 0, 0, 0.8);
 }
 
 html{
