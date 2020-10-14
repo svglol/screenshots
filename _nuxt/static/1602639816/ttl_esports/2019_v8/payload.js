@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/ttl_esports/2019_v8", {data:[{}],fetch:[],mutations:[]});

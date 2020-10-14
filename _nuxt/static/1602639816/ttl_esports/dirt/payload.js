@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/ttl_esports/dirt", {data:[{}],fetch:[],mutations:[]});
